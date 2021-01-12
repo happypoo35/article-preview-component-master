@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap");
+
+$tablet: 750px;
+$mobile: 540px;
+
+@mixin tablet {
+  @media screen and (max-width: $tablet) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+$Very-Dark-Grayish-Blue: hsl(217, 19%, 35%);
+$Desaturated-Dark-Blue: hsl(214, 17%, 51%);
+$Grayish-Blue: hsl(212, 23%, 69%);
+$Light-Grayish-Blue: hsl(210, 46%, 95%);
+
+$radius: .5rem;
+
+%transition {
+  transition: 0.3s ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  background: $Light-Grayish-Blue;
+  color: $Very-Dark-Grayish-Blue;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.article {
+  position: relative;
+  max-width: 46rem;
+  display: flex;
+  background: white;
+  border-radius: $radius;
+  margin: 2rem 5rem;
+  box-shadow: 0 2rem 4rem -1rem rgba($Grayish-Blue, 0.4);
+  @extend %transition;
+
+  @include tablet {
+    max-width: 30rem;
+    flex-direction: column;
+  }
+  @include mobile {
+    margin: 1.5rem;
+  }
+}
+
+.image {
+  width: 18rem;
+  background: no-repeat left center url("../images/drawers.jpg");
+  background-size: cover;
+  border-radius: $radius 0 0 $radius;
+
+  @include tablet {
+    height: 13em;
+    background: no-repeat top center url("../images/drawers.jpg");
+    background-size: cover;
+    width: 100%;
+    border-radius: $radius $radius 0 0;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 2rem 2.5rem;
+
+  @include tablet {
+    flex: unset;
+    padding: 2rem 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    letter-spacing: 0.04rem;
+    margin-bottom: 0.8rem;
+    @extend %transition;
+
+    @include tablet {
+      font-size: 0.9rem;
+    }
+  }
+
+  p {
+    color: $Desaturated-Dark-Blue;
+    font-size: 0.85rem;
+    letter-spacing: -0.01rem;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+
+    @include tablet {
+      font-size: 0.8rem;
+      margin-bottom: 2rem;
+      letter-spacing: 0.02rem;
+    }
+  }
+}
+
+.content-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 14rem;
+
+  .user {
+    display: flex;
+    align-items: center;
+
+    h4 {
+      font-size: 0.85rem;
+    }
+
+    span {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: $Grayish-Blue;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 2.5rem;
+      margin-right: 1rem;
+
+      @include tablet {
+        width: 2.2rem;
+      }
+    }
+  }
+
+  .share {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    color: $Desaturated-Dark-Blue;
+    background: $Light-Grayish-Blue;
+    z-index: 1;
+    @extend %transition;
+
+    @include mobile {
+      min-width: 1.8rem;
+      height: 1.8rem;
+    }
+
+    &:hover,
+    &.active {
+      background: $Desaturated-Dark-Blue;
+      color: white;
+    }
+
+    &.active:hover {
+      background: $Grayish-Blue;
+    }
+  }
+}
+
+.popup {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: -4rem;
+  bottom: 5rem;
+  background: $Very-Dark-Grayish-Blue;
+  color: white;
+  border-radius: $radius;
+  padding: 1rem 2rem;
+  box-shadow: 0 0.5rem 1rem rgba($Grayish-Blue, 0.4);
+  visibility: hidden;
+  opacity: 0;
+  @extend %transition;
+
+  &.active {
+    visibility: visible;
+    bottom: 6rem;
+    padding: 1rem 2rem;
+    opacity: 1;
+  }
+
+  @include tablet {
+    right: -4.5rem;
+    bottom: 4rem;
+
+    &.active {
+      bottom: 5rem;
+    }
+  }
+
+  @include mobile {
+    overflow: hidden;
+    width: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 $radius $radius;
+    padding: 1.4rem 0;
+    opacity: 1;
+
+    &.active {
+      width: 100%;
+      bottom: 0;
+      padding: 1.4rem 2rem;
+    }
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 40%) rotate(45deg);
+    height: 1rem;
+    width: 1rem;
+    background: $Very-Dark-Grayish-Blue;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  span {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.3rem;
+    color: $Grayish-Blue;
+
+    @include mobile {
+      font-size: 0.7rem;
+    }
+  }
+
+  i {
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding-left: 1rem;
+    @extend %transition;
+
+    &:hover {
+      color: darken($Light-Grayish-Blue, 2%);
+    }
+
+    @include mobile {
+      padding-left: 0.8rem;
+    }
+  }
+}
